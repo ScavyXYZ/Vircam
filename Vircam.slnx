@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Vircam/Driver/VircamDriver20.vcxproj" Id="3b67bda3-bbc7-46f6-9560-7ba72baebf71" />
+  <Project Path="Vircam/Driver/VircamDriver30.vcxproj" Id="dd51af4b-0503-460d-8c47-74f2ccb04e11" />
+  <Project Path="Vircam/Driver/VircamDriver60.vcxproj" Id="3d0a9889-9ec1-4012-9382-4fe1eb610d28" />
+  <Project Path="Vircam/RegisterDriver/RegisterDriver.vcxproj" Id="c5d1cb62-60c8-4e2a-a2ba-c94544b43659">
+    <Platform Solution="Release|x86" Project="x64" />
+  </Project>
+  <Project Path="Vircam/Unregister/Unregister.vcxproj" Id="374a07d0-b57b-48ff-887b-669dcdebd223">
+    <Platform Solution="Release|x86" Project="x64" />
+  </Project>
+  <Project Path="Vircam/Vircam.vcxproj" Id="e024f928-b4a2-4890-b201-1b6f3c15b963">
+    <Platform Solution="Release|x86" Project="x64" />
+  </Project>
+</Solution>
