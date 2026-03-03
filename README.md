@@ -19,7 +19,7 @@ Nothing complicated
 2. Start the Vircam program
 <video src="https://github.com/user-attachments/assets/170d55dc-6a91-4c67-b3b0-fd6cf353d8d2" autoplay loop muted plysinline>
 </video>
-3. Just click on the files in the window that opens, and they will be displayed on your camera! (I hope you don't need a tutorial☺️)
+3. Just click on the files in the window that opens, and they will be displayed on your camera! (I hope you don't need a tutorial for that☺️)
 
 ## Build(for developers)
 1. Download repo source
