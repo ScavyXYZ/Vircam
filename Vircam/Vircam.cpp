@@ -396,15 +396,12 @@ bool loadFile(const fs::path& path) {
     g.fileIsVideo = vid;
     g.loadedFile = filename;
 
-    // 2. Робота зі спільною пам'яттю
-    // Використовуємо константу з shared.inl для стабільності драйвера
     size_t totalMappingSize = sizeof(SharedMemHeader) + MAX_SHARED_IMAGE_SIZE;
 
     g.hMutex = CreateMutexA(nullptr, FALSE, MUTEX_NAME);
     g.hWantEvent = CreateEventA(nullptr, FALSE, FALSE, WANT_NAME);
     g.hSentEvent = CreateEventA(nullptr, FALSE, FALSE, SENT_NAME);
 
-    // Створюємо або відкриваємо існуючий мапінг
     g.hMapFile = CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr,
         PAGE_READWRITE, 0, (DWORD)totalMappingSize, DATA_NAME);
 
@@ -416,17 +413,15 @@ bool loadFile(const fs::path& path) {
     g.header = (SharedMemHeader*)MapViewOfFile(g.hMapFile, FILE_MAP_ALL_ACCESS, 0, 0, 0);
     if (!g.header) return false;
 
-    // 3. Оновлення метаданих для драйвера
     g.header->maxSize = (DWORD)MAX_SHARED_IMAGE_SIZE;
     g.header->width = w;
     g.header->height = h;
     g.header->stride = w;
-    g.header->format = 0;      // RGBA
+    g.header->format = 0;
     g.header->resizemode = 1;
     g.header->mirrormode = 0;
     g.header->timeout = 1000;
 
-    // 4. Підготовка першого кадру
     if (vid) {
         g.decoder.readFrame(g.displayBuffer.data());
         g.videoStartWallTime = g.timer.getTime();
@@ -436,10 +431,8 @@ bool loadFile(const fs::path& path) {
         g.displayBuffer = g.frameBuffer;
     }
 
-    // Копіюємо дані в спільний буфер (тепер це безпечно для будь-якого розміру до 8K)
     memcpy(g.header->data, g.displayBuffer.data(), (size_t)w * h * 4);
 
-    // Оновлення статусу
     if (vid)
         snprintf(g.statusMsg, sizeof(g.statusMsg), "%s | %dx%d | %.2f fps",
             path.filename().string().c_str(), w, h, g.decoder.fps);
